@@ -1,0 +1,20 @@
+{
+  "produits": [
+    {
+      "name": "Printer",
+      "price": 300,
+      "selected": true,
+      "id": 2,
+      "available": false,
+      "quantity": "1"
+    },
+    {
+      "name": "azerty",
+      "price": "100",
+      "quantity": "20",
+      "selected": true,
+      "available": true,
+      "id": 3
+    }
+  ]
+}
