@@ -28,15 +28,15 @@ Recevoir des données sur son entrée dans le composant **Products-List.Componen
 dans le composant principal **Products.Component.html**
 
 ````angular2
-(productEventEmitterListProduct)="onActionEventProductsList($event)
+<app-products-list  [listProductsInput$]="products$"  (productEventEmitterListProduct)="onActionEventProductsList($event)"></app-products-list>
 ````
 
-**[listProductsInput$]=products$** faire reférence à **input**
+**[listProductsInput$]=products$**:  fait reférence à **Input**
 
-**(productEventEmitterListProduct)=onActionEventProductsList($event)**  fait réfénrece à **Output**
+**(productEventEmitterListProduct)=onActionEventProductsList($event)**: fait réfénrece à **Output**
+
 
 ## Application angular 11
-
 
 ![](doc/images/application.jpg)
 
