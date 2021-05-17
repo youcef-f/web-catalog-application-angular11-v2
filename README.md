@@ -1,9 +1,40 @@
-# Application utlisant le framework angular 11  ( projet avec unique composant)
+# Application V2 utlisant le framework angular 11  ( projet avec décomposition de composants et utlisation de @Input @Output Angular)
+
+**Input** : signifie pour un composant donné de rececoir des données d'un autres composants
+
+**Outup** : Signifie qu'un composant emet un evenement vers le composant qui l'instancie ( ou lui fait appel dans sa page html)
+
+ 
+ 
+ #### Avantage et inconvenient de Input et Output
+**Avantage:** decompositions de l'application par composants au lieu d'un unique compoant
+
+**Inconvenient:**  La decomposition de l'application en composants plus petits induit des appels en cascade pour remonté tous la branche jusqu'à l'appel de la fonction principale.
 
 
 https://ultimatecourses.com/blog/angular-ngfor-async-pipe
 
-![](doc/images/singleComposant.jpg)
+Emettre un evenement sur sa sortie. Exemple select, delete , edit ....  dans le composant **Products-List.Component.ts**
+
+````angular2
+  @Output() productEventEmitterListProduct: EventEmitter<ActionEvent> = new EventEmitter();
+````
+Recevoir des données sur son entrée dans le composant **Products-List.Component.ts**. pour exemple listProductsInput va lui etre affecté la liste des produit dans le composant principal **Products.Component.ts**, qu'il devra ensuite affiché. 
+
+````angular2
+  @Input() public listProductsInput$: Observable<AppDataState<Product[]>> | null = null;
+````
+
+dans le composant principal **Products.Component.html**
+
+````angular2
+(productEventEmitterListProduct)="onActionEventProductsList($event)
+````
+
+**[listProductsInput$]=products$** faire reférence à **input**
+
+**(productEventEmitterListProduct)=onActionEventProductsList($event)**  fait réfénrece à **Output**
+
 ## Application angular 11
 
 
@@ -201,6 +232,22 @@ Modifier le fichier angular.json comme suit
 
 
 ````shell script
+λ ng g c components/products/products-nav-bar
+CREATE src/app/components/products/products-nav-bar/products-nav-bar.component.html (31 bytes)
+CREATE src/app/components/products/products-nav-bar/products-nav-bar.component.spec.ts (684 bytes)
+CREATE src/app/components/products/products-nav-bar/products-nav-bar.component.ts (313 bytes)
+CREATE src/app/components/products/products-nav-bar/products-nav-bar.component.css (0 bytes)
+UPDATE src/app/app.module.ts (1256 bytes)
+
+λ ng g c components/products/products-list
+CREATE src/app/components/products/products-list/products-list.component.html (28 bytes)
+CREATE src/app/components/products/products-list/products-list.component.spec.ts (669 bytes)
+CREATE src/app/components/products/products-list/products-list.component.ts (302 bytes)
+CREATE src/app/components/products/products-list/products-list.component.css (0 bytes)
+UPDATE src/app/app.module.ts (1385 bytes)
+
+----------------------------------------------------
+
  ng g c components/nav-bar
 CREATE src/app/components/nav-bar/nav-bar.component.html (22 bytes)
 CREATE src/app/components/nav-bar/nav-bar.component.spec.ts (627 bytes)
@@ -329,13 +376,11 @@ il faut faire appelle à la calsse ActivatedRoute.snpashot.params.id
     this.productId = activatedRoute.snapshot.params.id;
 
 ## Etat de l'application: methode input output d'angular.
-![](doc/images/outputinput.jpg)
-
-## Etat de l'application: methode ngRx. ( préféré)
-le défaut de la méthode **input output** d'Angular deviens assez compliquer pour de grosse application. Il faut donc préféré **ngRx** à la place.
-![](doc/images/ngrx.jpg)
-
-il faut pour cela decomposer l'application en composant
 ![](doc/images/composants.jpg)
+
+## Etat de l'application: methode ngRx. ( préféré). projet v3
+![](doc/images/ngrx.jpg)
+le défaut de la méthode **input output** d'Angular deviens assez compliquer pour de grosse application. Il faut donc préféré **ngRx** à la place qui s'appuye sur **EventSubjectService**
+![](doc/images/outputinput.jpg)
 
 
