@@ -9,12 +9,20 @@
       "quantity": "1"
     },
     {
-      "name": "azerty",
+      "name": "azertyw",
       "price": "100",
-      "quantity": "20",
+      "selected": false,
+      "id": 3,
+      "available": true,
+      "quantity": "20"
+    },
+    {
+      "name": "z",
+      "price": 0,
+      "quantity": 0,
       "selected": true,
       "available": true,
-      "id": 3
+      "id": 4
     }
   ]
 }

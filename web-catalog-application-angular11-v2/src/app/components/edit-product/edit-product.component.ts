@@ -10,27 +10,27 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class EditProductComponent implements OnInit {
 
-  formGroupEditProduct?: FormGroup; //= new FormGroup({});
+  formGroupEditProduct?: FormGroup; // = new FormGroup({});
   productId: number ;
-  submitted: boolean = false;
+  submitted: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private productsService: ProductsService,
               private formbuilder: FormBuilder) {
-    //activatedRoute.snapshot.params.id permet de recuperer l'id dans url
+    // activatedRoute.snapshot.params.id permet de recuperer l'id dans url
     this.productId = activatedRoute.snapshot.params.id;
-
+    this.submitted = false;
     console.log(this.productId);
   }
 
 
   ngOnInit(): void {
      this.productsService.getProduct(this.productId).
-    subscribe(editPrd=>
+    subscribe(editPrd =>
       {
-        //alert("sucesss");
+        // alert("sucesss");
       console.log(editPrd);
-        this.formGroupEditProduct = this.formbuilder.group({
+      this.formGroupEditProduct = this.formbuilder.group({
           name: [editPrd.name, Validators.required],
           price: [editPrd.price, Validators.required],
           selected: [editPrd.selected, Validators.required],
@@ -39,19 +39,19 @@ export class EditProductComponent implements OnInit {
           quantity: [editPrd.quantity, Validators.required]
        });
 
-        console.log(this.formGroupEditProduct);
+      console.log(this.formGroupEditProduct);
 
     });
   }
 
 
-  onUpdateProduct() {
+  onUpdateProduct(): void{
     console.log(this.formGroupEditProduct);
     console.log(this.formGroupEditProduct?.value);
-    this.submitted=true;
-    if ( this.formGroupEditProduct?.invalid) return ;
+    this.submitted = true;
+    if ( this.formGroupEditProduct?.invalid) { return ; }
     this.productsService.updateProducts(this.formGroupEditProduct?.value).
-    subscribe(data=> {alert("sucesss"); console.log(data); });
+    subscribe(data => {alert('sucesss'); console.log(data); });
   }
 
 

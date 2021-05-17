@@ -5,7 +5,7 @@
       <label>Name</label>
       <input type="text"  id="fbname" class="form-control" formControlName="name" [ngClass]="{'is-invalid': submitted && formGroupAddProduct.controls.name.errors}">
        <div *ngIf="submitted && formGroupAddProduct.controls.name.errors" class="invalid-feedback">
-         <div *ngIf="formGroupAddProduct.controls.name.errors.required">Name is required</div>
+          <div *ngIf="formGroupAddProduct.controls.name.errors.required">Name is required</div>
        </div>
     </div>
     <div class="form-group">

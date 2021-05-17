@@ -11,17 +11,19 @@ import {ProductsService} from '../../services/products.service';
 export class AddProductComponent implements OnInit {
 
   formGroupAddProduct?: FormGroup = new FormGroup({});
-  submitted: boolean = false ;
+  submitted: boolean  ;
   constructor(private formBuilder: FormBuilder, private productsService: ProductsService) {
+
+    this.submitted = false ;
   }
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm() {
+  initForm(): void {
     this.formGroupAddProduct = this.formBuilder.group({
-      name: ["", Validators.required],
+      name: ['', Validators.required],
       price: [0, Validators.required],
       quantity: [0, Validators.required],
       selected: [true, Validators.required],
@@ -29,11 +31,11 @@ export class AddProductComponent implements OnInit {
   }
 
 
-  onSaveProduct() {
+  onSaveProduct(): void {
     console.log(this.formGroupAddProduct);
-    this.submitted=true;
-    if ( this.formGroupAddProduct?.invalid) return ;
+    this.submitted = true;
+    if ( this.formGroupAddProduct?.invalid) { return ; }
     this.productsService.saveProduct(this.formGroupAddProduct?.value).
-      subscribe(data=> {alert("sucesss"); console.log(data); });
+      subscribe(data => {alert('sucesss'); console.log(data); });
   }
 }

@@ -16,47 +16,47 @@ export class ProductsService {
 
   getAllProducts(): Observable<Product[]>{
     let host: string;
-    host = ( Math.random()<0.8)?environment.host:environment.unreachable;
+    host = ( Math.random() < 0.8) ? environment.host : environment.unreachable;
     return this.http.get<Product[]>(host + '/produits');
   }
 
   getSelectedProducts(): Observable<Product[]>{
     let host: string;
-    host = ( Math.random()<0.8)?environment.host:environment.unreachable;
+    host = ( Math.random() < 0.8) ? environment.host : environment.unreachable;
     return this.http.get<Product[]>(host + '/produits?selected=true');
   }
 
   getAvailableProducts(): Observable<Product[]> {
     let host: string;
-    host = ( Math.random()<0.8)?environment.host:environment.unreachable;
+    host = ( Math.random() < 0.8) ? environment.host : environment.unreachable;
     return this.http.get<Product[]> (host + '/produits?available=true');
   }
 
   getSearchProducts(keyWord: string) : Observable<Product[]>  {
     let host: string;
     host = environment.host;
-    return this.http.get<Product[]> (host + '/produits?name_like='+keyWord);
+    return this.http.get<Product[]> (host + '/produits?name_like=' + keyWord);
   }
 
   selectProducts (product: Product): Observable<Product> {
     let host: string;
     host = environment.host;
-    product.selected=!product.selected;
-    return this.http.put<Product>(host + '/produits/'+product.id, product);
+    product.selected = !product.selected;
+    return this.http.put<Product>(host + '/produits/' + product.id, product);
   }
 
 
   deleteProduct(product: Product): Observable<void>  {
     let host: string;
     host = environment.host;
-    product.selected=!product.selected;
-    return this.http.delete<void>(host + '/produits/'+product.id);
+    product.selected = !product.selected;
+    return this.http.delete<void>(host + '/produits/' + product.id);
   }
 
   saveProduct(product: Product): Observable<Product> {
      let host: string;
      host = environment.host;
-       return this.http.post<Product>(host + '/produits', product);
+     return this.http.post<Product>(host + '/produits', product);
   }
 
   getProduct(idProduct: number ): Observable<Product> {
@@ -70,6 +70,5 @@ export class ProductsService {
     host = environment.host;
     return this.http.put<Product> (host + '/produits/' + product.id, product);
   }
-
 
 }

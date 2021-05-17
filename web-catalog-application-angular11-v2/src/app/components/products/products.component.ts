@@ -3,7 +3,7 @@ import {ProductsService} from '../../services/products.service';
 import {Product} from '../../models/product.model';
 import {Observable, of} from 'rxjs';
 import {catchError, map, startWith} from 'rxjs/operators';
-import {AppDataState, DataStateEnum} from '../../state/product.state';
+import {ActionEvent, AppDataState, DataStateEnum, ProductActionsTypes} from '../../state/product.state';
 import {Router} from '@angular/router';
 
 
@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   public products$: Observable<AppDataState<Product[]>> | null = null;
   public readonly dataStateEnum: typeof DataStateEnum = DataStateEnum;
 
-  constructor(private productsservice: ProductsService,private router: Router) {
+  constructor(private productsservice: ProductsService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  onGetAllProducts2() {
+  onGetAllProducts2(): void {
     /* Methode 1 pour reuperer les données */
     /*this.productsservice.getAllProducts().subscribe(data => {this.products = data; }, error => {console.log(error); });*/
 
@@ -53,7 +53,7 @@ export class ProductsComponent implements OnInit {
       catchError(err => of({dataState: DataStateEnum.ERROR, errorMessage: err.message})) );
   }
 
-  onGetSelectedProducts() {
+  onGetSelectedProducts(): void {
     this.products$ = this.productsservice.getSelectedProducts().pipe(
       map((data) => ({ myData: data, dataState: DataStateEnum.LOADED})),
       startWith({dataState: DataStateEnum.LOADING}),
@@ -61,7 +61,8 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  onGetAvailableProducts() {
+  onGetAvailableProducts(): void {
+    console.log('getall');
     this.products$ = this.productsservice.getAvailableProducts().pipe(
       map((data) => ({ myData: data, dataState: DataStateEnum.LOADED})),
       startWith({dataState: DataStateEnum.LOADING}),
@@ -69,16 +70,16 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  onSearch(formsSearch: any) {
+  onSearch(formsSearch: any): void {
     this.products$ = this.productsservice.getSearchProducts(formsSearch.InputKeyword).pipe(
       map((data) => ({ myData: data, dataState: DataStateEnum.LOADED})),
       startWith({dataState: DataStateEnum.LOADING}),
       catchError(err => of({ errorMessage: err.message, dataState: DataStateEnum.ERROR })) );
   }
 
-  onSelect(product: Product ) {
-    this.productsservice.selectProducts(product).subscribe(data=>{
-      product.selected=data.selected;
+  onSelect(product: Product ): void{
+    this.productsservice.selectProducts(product).subscribe(data => {
+      product.selected = data.selected;
     });
   }
 
@@ -92,8 +93,9 @@ export class ProductsComponent implements OnInit {
   }
 */
 
-  onDelete(product: Product) {
-    let v = confirm("Etes vous sûre de vouloir supprimer l'enregistrement ?")
+  onDelete(product: Product): void {
+    let v = confirm('Etes vous sûre de vouloir supprimer l\'enregistrement ?')
+    // tslint:disable-next-line:triple-equals
     if (v != true) {
       return;
     }
@@ -102,13 +104,32 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-
-  onNewProducts() {
-    this.router.navigateByUrl("/newProduct");
+  onNewProducts(): void {
+    this.router.navigateByUrl('/newProduct');
   }
 
-  onEdit(prd: Product) {
-    this.router.navigateByUrl("/editProduct/" + prd.id);
+  onEdit(prd: Product): void {
+    this.router.navigateByUrl('/editProduct/' + prd.id);
 
+  }
+
+  // composant products-nav-bar
+  onActionEventNavBar($event: ActionEvent): void {
+      switch ($event.type) {
+        case ProductActionsTypes.GET_AVAILABLE_PRODUCTS: this.onGetAvailableProducts(); break;
+        case ProductActionsTypes.GET_SELECTED_PRODUCTS: this.onGetSelectedProducts(); break;
+        case ProductActionsTypes.SEARCH_PRODUCTS: this.onSearch($event.PayloadParamFun); break;
+        case ProductActionsTypes.NEW_PRODUCT: this.onNewProducts(); break;
+        case ProductActionsTypes.GET_ALL_PRODUCTS: this.onGetAllProducts(); break;
+      }
+  }
+
+  // composant products-list
+  onActionEventProductsList($event: ActionEvent): void {
+    switch ($event.type) {
+      case ProductActionsTypes.SELECT_PRODUCT: this.onSelect($event.PayloadParamFun); break;
+      case ProductActionsTypes.EDIT_PRODUCT: this.onEdit($event.PayloadParamFun); break;
+      case ProductActionsTypes.DELETE_PRODUCT: this.onDelete($event.PayloadParamFun); break;
+    }
   }
 }
