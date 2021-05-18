@@ -36,6 +36,8 @@ dans le composant principal **Products.Component.html**
 **(productEventEmitterListProduct)=onActionEventProductsList($event)**: fait réfénrece à **Output**
 
 
+
+
 ## Application angular 11
 
 ![](doc/images/application.jpg)
@@ -377,6 +379,14 @@ il faut faire appelle à la calsse ActivatedRoute.snpashot.params.id
 
 ## Etat de l'application: methode input output d'angular.
 ![](doc/images/composants.jpg)
+
+![](doc/images/inputoutput0.jpg)
+
+![](doc/images/inputoutput1.jpg)
+
+![](doc/images/inputoutput2.jpg)
+
+![](doc/images/inputoutput3.jpg)
 
 ## Etat de l'application: methode ngRx. ( préféré). projet v3  ( subscriber et publisher )
 ![](doc/images/ngrx.jpg)
