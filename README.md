@@ -4,7 +4,7 @@
 
 **Outup** : Signifie qu'un composant emet un evenement vers le composant qui l'instancie ( ou lui fait appel dans sa page html)
 
- 
+ ![](doc/images/inputoutput00.jpg)
  
  #### Avantage et inconvenient de Input et Output
 **Avantage:** decompositions de l'application par composants au lieu d'un unique compoant
