@@ -405,8 +405,9 @@ il faut faire appelle à la calsse ActivatedRoute.snpashot.params.id
 ![](doc/images/inputoutput3.jpg)
 
 ## Etat de l'application: methode RXJS. ( préféré). projet v3  ( subscriber et publisher )
-![](doc/images/ngrx.jpg)
 le défaut de la méthode **input output** d'Angular deviens assez compliquer pour de grosse application. Il faut donc préféré **ngRx** à la place qui s'appuye sur **EventSubjectService**
 ![](doc/images/outputinput.jpg)
 
+## Etat de l'application: methode ngRX. ( préféré). projet v4
+![](doc/images/ngrx.jpg)
 
