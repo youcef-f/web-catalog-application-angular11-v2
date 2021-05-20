@@ -1,11 +1,25 @@
 # Application V2 utlisant le framework angular 11  ( projet avec décomposition de composants et utlisation de @Input @Output Angular)
 
+
+https://www.javatuto.com/angular/angular-ngrx-commencez-avec-ngrx/
 **Input** : signifie pour un composant donné de rececoir des données d'un autres composants
 
 **Outup** : Signifie qu'un composant emet un evenement vers le composant qui l'instancie ( ou lui fait appel dans sa page html)
 
  ![](doc/images/inputoutput00.jpg)
  
+ 
+Une application Angular est généralement composée de nombreux composants. Chacun de ces composants a son propre état et n’a aucune conscience de l’état des autres composants. Afin de partager des informations entre les composants parent-enfant, nous utilisons les décorateurs **@Input** et **@Output**. Cependant, cette approche n’est pratique que si votre application se compose de quelques composants, comme illustré ci-dessous.
+ 
+![](doc/images/inputoutput01.jpg)
+ 
+Lorsque le nombre de composants augmente, il devient un cauchemar de transmettre les informations entre les composants uniquement via les décorateurs @Input et @Output. Prenons la figure suivante pour élaborer à ce sujet.
+ 
+ ![](doc/images/inputoutput02.jpg)
+  
+ Si vous devez passer des informations du composant trois au composant six, vous devrez sauter quatre fois et impliquer trois autres composants. Comme vous pouvez le voir, c’est une façon très lourde et sujette aux erreurs de gérer l’état. C’est là que le motif Redux entre en jeu.
+ 
+
  #### Avantage et inconvenient de Input et Output
 **Avantage:** decompositions de l'application par composants au lieu d'un unique compoant
 
@@ -15,6 +29,8 @@
 https://ultimatecourses.com/blog/angular-ngfor-async-pipe
 
 Emettre un evenement sur sa sortie. Exemple select, delete , edit ....  dans le composant **Products-List.Component.ts**
+
+
 
 ````angular2
   @Output() productEventEmitterListProduct: EventEmitter<ActionEvent> = new EventEmitter();
@@ -388,7 +404,7 @@ il faut faire appelle à la calsse ActivatedRoute.snpashot.params.id
 
 ![](doc/images/inputoutput3.jpg)
 
-## Etat de l'application: methode ngRx. ( préféré). projet v3  ( subscriber et publisher )
+## Etat de l'application: methode RXJS. ( préféré). projet v3  ( subscriber et publisher )
 ![](doc/images/ngrx.jpg)
 le défaut de la méthode **input output** d'Angular deviens assez compliquer pour de grosse application. Il faut donc préféré **ngRx** à la place qui s'appuye sur **EventSubjectService**
 ![](doc/images/outputinput.jpg)
